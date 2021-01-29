@@ -11,25 +11,9 @@ echo "</select>";
 echo "<select name='cityid' onchange='showCities(this.value)' id='cityid'>";
 echo "</select>";
 
-if (isset($_POST['selsity'])) {
-    $cityid = $_POST["cityid"];
-    $sel3="SELECT ho.id, ho.Hotel, ci.City, co.Country, ho.cost, ho.stars FROM Hotels ho JOIN Cities ci ON ho.cityid=ci.id
-    JOIN Countries co ON ci.countryid=co.id WHERE ho.cityid = ".$cityid;
-    $res = mysqli_query($link, $sel3);
-    echo '<table class="table table-striped">';
-    while ($row=mysqli_fetch_array($res, MYSQLI_NUM)){
-        echo '<tr>';
-        echo '<td>'.$row[0].'</td>';
-        echo '<td>'.$row[1].'</td>';
-        echo '<td>'.$row[2].'</td>';
-        echo '<td>'.$row[3].'</td>';
-        echo '<td>'.$row[4].'</td>';
-        echo '<td>'.$row[5].'</td>';
-        echo "<td><a href='index.php?page=5&hotel=".$row[0]."' target='_blank'>Детальнее...</a></td>";
-        echo '</tr>';
-    }
-    echo '</table>';
-}
+// echo "</select>";
+// echo "<select name='cityid' onchange='showHotels(this.value)' id='cityid'>";
+// echo "</select>";
 
 ?>
 <script>
@@ -45,7 +29,7 @@ async function showCities(val){
 async function showHotels(val){
     let formData=new FormData();
     formData.append("arg1", val);
-    let response=await fetch("ajax2.php", {method: "POST", body: formData});
+    let response=await fetch("pages/ajax2.php", {method: "POST", body: formData});
     if(response.ok===true){
         let content=await response.text();
         console.log(content);
