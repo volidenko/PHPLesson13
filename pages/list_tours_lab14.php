@@ -1,5 +1,4 @@
 <?php
-//print_r(PDO::getAvailableDrivers());
 function connect($host = "localhost:3306", $user = "root", $pasw = "root", $dbname = "traveldb")
 {
     $cs = "mysql:host=" . $host . ";dbname=" . $dbname . ";charset=utf8";
@@ -18,9 +17,11 @@ function connect($host = "localhost:3306", $user = "root", $pasw = "root", $dbna
 }
 
 $link = connect();
-$res = $link->query("SELECT * FROM Countries");
-echo "<ul>";
-while ($row = $res->fetch()) {
-    echo "<li>" . $row[0] . ". " . $row[1] . "</li>";
+$res = $link->prepare("SELECT ho.hotel, ci.city, co.country, ho.cost, ho.stars FROM Hotels ho JOIN Cities ci ON ho.cityid=ci.id
+JOIN Countries co ON ci.countryid=co.id");
+$arr = array();
+$res->execute();
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+    $arr[] = $row;
 }
-echo "</ul>";
+echo json_encode($arr);

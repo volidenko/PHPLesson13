@@ -4,5 +4,4 @@ echo $str."<br>";
 $p2 = json_decode($str);
 var_dump($p2);
 echo "<br>". $p2->y;
-echo $p2->Show();
-
+//echo $p2->Show();
