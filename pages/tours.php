@@ -8,7 +8,7 @@ while ($row = mysqli_fetch_array($res, MYSQLI_NUM)) {
     echo "<option value='" . $row[0] . "'>" . $row[1] . "</option>";
 }
 echo "</select>";
-echo "<select name='cityid' onchange='showCities(this.value)' id='cityid'>";
+echo "<select name='cityid' onchange='showHotels(this.value)' id='cityid'>";
 echo "</select>";
 
 // echo "</select>";
